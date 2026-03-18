@@ -1,24 +1,23 @@
 public class Library {
 
-    // Inner Member class
     public static class Member {
         private String name;
         private boolean isActive;
         private String membershipType;
 
-        // Constructor
+        // Member Constructor for the class
         public Member(String name, boolean isActive, String membershipType) {
             this.name = name;
             this.isActive = isActive;
             this.membershipType = membershipType;
         }
 
-        // Returns if membership is active
+        // Returns a boolean value if the membership is active or not
         public boolean activeMember() {
             return isActive;
         }
 
-        // Returns membership fee based on type
+        // Type of membership lookup. Our library isn’t free
         public double typeMemberFee() {
             switch (membershipType.toLowerCase()) {
                 case "student":
@@ -32,21 +31,5 @@ public class Library {
             }
         }
 
-        // Borrow a book
-        public void bookActivity(String bookTitle) {
-            System.out.println(name + " borrowed: " + bookTitle);
-        }
-
-        // Return a book
-        public void bookActivity(String bookTitle, boolean returning) {
-            if (returning) {
-                System.out.println(name + " returned: " + bookTitle);
-            }
-        }
-
-        // View activity
-        public void bookActivity() {
-            System.out.println(name + " checked their book activity.");
-        }
     }
 }
