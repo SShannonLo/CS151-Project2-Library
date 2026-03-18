@@ -40,4 +40,20 @@ public class Event {
     public void setDate(String date) {
         this.date = date;
     }
+    public void authorTalk(String authorName, String bookTitle) {
+    System.out.println("Author Talk by " + authorName + " about " + bookTitle);
+    }
+
+    public void writingWorkshop(String instructor, int durationMinutes) {
+    System.out.println("Workshop by " + instructor + " lasting " + durationMinutes + " minutes");
+    }
+
+    public void communityMeeting(String topic) {
+    System.out.println("Community meeting about " + topic);
+    }
+
+    public void storyTimeForKids(String storyTitle, int ageGroup) {
+    System.out.println("Story: " + storyTitle + " for age " + ageGroup);
+    }
+
 }
