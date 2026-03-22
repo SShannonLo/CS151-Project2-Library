@@ -1,55 +1,94 @@
-public class Staff {
+import java.util.ArrayList;
+
+// LibraryStaff class - represents an employee who works at the library
+// extends LibraryUser which holds shared info like name, email, phone
+public class LibraryStaff extends LibraryUser {
 
     private String staffId;
-    private String name;
     private String role;
-    private String email;
-    private String phone;
 
-    public Staff(String staffId, String name, String role, String email, String phone) {
+    // constructor - creates a new library staff member
+    public LibraryStaff(String name, String staffId, String email, String phone, String role) {
+        super(name, staffId, email, phone);
         this.staffId = staffId;
-        this.name = name;
         this.role = role;
-        this.email = email;
-        this.phone = phone;
     }
 
-    // adds a book to the library collection
-    public void addBook(Book book) {
-        System.out.println(book.getTitle() + " has been added to the library.");
+    // tells us what a staff member is allowed to do in the system
+    @Override
+    public String getPermissions() {
+        return "Staff can add/remove books, register members, and waive fines";
     }
 
-    // removes a book from the library collection
-    public void removeBook(Book book) {
-        System.out.println(book.getTitle() + " has been removed from the library.");
+    // adds a new member to the library
+    public void registerMember(Member member, Library library) {
+        if (member == null) {
+            System.out.println("Error: member cannot be null.");
+            return;
+        }
+        library.addMember(member);
+        System.out.println(member.getName() + " has been registered.");
     }
 
-    // searches for a book by title
-    public void searchBook(String title) {
-        System.out.println("Searching for: " + title);
+    // adds a book to a branch
+    public void addBook(Book book, Branch branch) {
+        if (book == null) {
+            System.out.println("Error: book cannot be null.");
+            return;
+        }
+        branch.addBook(book);
+        System.out.println(book.getTitle() + " has been added.");
     }
 
-    // registers a new member into the system
-    public void registerMember(Member member) {
-        System.out.println(member.getName() + " has been registered as a member.");
+    // removes a book from a branch
+    public void removeBook(Book book, Branch branch) {
+        if (book == null) {
+            System.out.println("Error: book cannot be null.");
+            return;
+        }
+        branch.removeBook(book);
+        System.out.println(book.getTitle() + " has been removed.");
     }
 
-    // waives any outstanding fines a member has
+    // waives all fines for a member
     public void waiveFine(Member member) {
-        System.out.println("Fine waived for: " + member.getName());
+        if (member == null) {
+            System.out.println("Error: member not found.");
+            return;
+        }
+        double amount = member.getOutstandingFines();
+        member.setOutstandingFines(0.0);
+        System.out.println("Waived $" + amount + " for " + member.getName());
     }
 
+    // clears all reservations on a book
+    public void clearReservation(Book book) {
+        if (book == null) {
+            System.out.println("Error: book not found.");
+            return;
+        }
+        book.clearReservations();
+        System.out.println("Reservations cleared for: " + book.getTitle());
+    }
+
+    // updates the staff member's role title
+    public void updateRole(String newRole) {
+        if (newRole == null || newRole.trim().isEmpty()) {
+            System.out.println("Error: role cannot be empty.");
+            return;
+        }
+        this.role = newRole;
+        System.out.println("Role updated to: " + newRole);
+    }
+
+    // getters
     public String getStaffId() { return staffId; }
-    public String getName() { return name; }
     public String getRole() { return role; }
-    public String getEmail() { return email; }
-    public String getPhone() { return phone; }
 
-    public void setName(String name) { this.name = name; }
+    // setters
     public void setRole(String role) { this.role = role; }
-    public void setEmail(String email) { this.email = email; }
-    public void setPhone(String phone) { this.phone = phone; }
 
+    // prints out staff info
     @Override
     public String toString() {
         return "Staff ID: " + staffId + " | Name: " + name + " | Role: " + role;
