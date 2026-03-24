@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 // LibraryStaff class - represents an employee who works at the library
 // extends LibraryUser which holds shared info like name, email, phone
 public class LibraryStaff extends LibraryUser {
