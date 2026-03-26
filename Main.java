@@ -15,4 +15,11 @@ public class Main {
 		System.out.println("_____________^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^_____________");
 	}
 	
+	// Adding some seed users and one librarian
+	public static void seedUsers() {
+        library.addUser(new Member( "Angelina", "018134168", "angelina.ryabechenkova@sjsu.edu", "4254290000"));
+        library.addUser(new Member("David", "018134169", "david.doe@sjsu.edu", "4254291111"));
+        library.addUser(new Staff("Librarian Bob","110110110", "bob.bookson@sjsu.edu", "4254292222"));
+    }
+	
 }
