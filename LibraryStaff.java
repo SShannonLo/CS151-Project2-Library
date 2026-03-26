@@ -1,6 +1,7 @@
 // LibraryStaff class - represents an employee who works at the library
 // extends LibraryUser which holds shared info like name, email, phone
-public class LibraryStaff extends LibraryUser {
+// implements Authentication so staff can log in with their credentials
+public class LibraryStaff extends LibraryUser implements Authentication {
 
     private String staffId;
     private String role;
@@ -59,14 +60,14 @@ public class LibraryStaff extends LibraryUser {
         System.out.println("Waived $" + amount + " for " + member.getName());
     }
 
-    // clears all reservations on a book
-    public void clearReservation(Book book) {
+    // clears any holds on a book so it can be borrowed again
+    public void clearHold(Book book) {
         if (book == null) {
             System.out.println("Error: book not found.");
             return;
         }
         book.clearReservations();
-        System.out.println("Reservations cleared for: " + book.getTitle());
+        System.out.println("Hold cleared for: " + book.getTitle());
     }
 
     // updates the staff member's role title
