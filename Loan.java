@@ -13,7 +13,6 @@ public class Loan {
     private Book book;
     private LocalDate borrowDate;
     private LocalDate dueDate;
-    private LocalDate returnDate;
     private boolean isReturned;
     private double fine;
 
@@ -66,21 +65,10 @@ public class Loan {
             System.out.println("Error: book has already been returned.");
             return;
         }
-        this.returnDate = LocalDate.now();
         this.isReturned = true;
         this.fine = calculateFine();
         book.setAvailable(true);
         System.out.println("Book returned. Fine: $" + fine);
-    }
-
-    // returns a summary of the loan details
-    public String getSummary() {
-        return "Loan ID: " + loanId +
-                " | Member: " + member.getName() +
-                " | Book: " + book.getTitle() +
-                " | Due: " + dueDate +
-                " | Returned: " + isReturned +
-                " | Fine: $" + fine;
     }
 
     // getters
@@ -89,7 +77,6 @@ public class Loan {
     public Book getBook() { return book; }
     public LocalDate getBorrowDate() { return borrowDate; }
     public LocalDate getDueDate() { return dueDate; }
-    public LocalDate getReturnDate() { return returnDate; }
     public boolean isReturned() { return isReturned; }
     public double getFine() { return fine; }
 
@@ -100,6 +87,11 @@ public class Loan {
     // prints out loan info
     @Override
     public String toString() {
-        return getSummary();
+        return "Loan ID: " + loanId +
+                " | Member: " + member.getName() +
+                " | Book: " + book.getTitle() +
+                " | Due: " + dueDate +
+                " | Returned: " + isReturned +
+                " | Fine: $" + fine;
     }
 }
