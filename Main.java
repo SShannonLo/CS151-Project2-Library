@@ -45,9 +45,9 @@ public class Main {
 				if (user instanceof Member) {
 				    Member member = (Member) user;
 				    member.showMenu();
-//				} else if (user instanceof Staff) {
-//				    Staff staff = (Staff) user;
-//				    staff.showMenu(staff);
+				} else if (user instanceof LibraryStaff) {
+				    LibraryStaff staff = (LibraryStaff) user;
+				    staff.showMenu(staff);
 				}
 				
 				if(user != null) {
@@ -73,7 +73,7 @@ public class Main {
 	public static void seedUsers(Library libraryCityLibrary) {
         libraryCityLibrary.addUser(new Member( "Angelina", "018134168", "angelina.ryabechenkova@sjsu.edu", "4254290000", "00", libraryCityLibrary));
         libraryCityLibrary.addUser(new Member("David", "018134169", "david.doe@sjsu.edu", "4254291111", "11", libraryCityLibrary));
-       // library.addUser(new Staff("Librarian Bob","110110110", "bob.bookson@sjsu.edu", "4254292222"));
+        libraryCityLibrary.addUser(new LibraryStaff("Librarian Bob","110110110", "22", "bob.bookson@sjsu.edu", "4254292222", "Staff"));
     }
 	
 	// Adding some books to our library.

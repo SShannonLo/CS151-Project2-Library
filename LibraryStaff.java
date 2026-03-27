@@ -109,4 +109,13 @@ public class LibraryStaff extends LibraryUser implements Authentication {
     public String toString() {
         return "Staff ID: " + staffId + " | Name: " + name + " | Role: " + role;
     }
+
+    
+    
+    
+    // Can you please implement this? So we can see staff menu to delete users or add them?
+	public void showMenu(LibraryStaff staff) {
+		// TODO Auto-generated method stub
+		
+	}
 }

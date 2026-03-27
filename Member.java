@@ -1,6 +1,6 @@
 import java.util.ArrayList; // Keeping imports to the minimum
 import java.util.Scanner;
-public class Member extends LibraryUser { // implements Authentication
+public class Member extends LibraryUser implements Authentication{ 
     
     private String role = "library member";
     private double fines;
@@ -25,10 +25,8 @@ public class Member extends LibraryUser { // implements Authentication
 
 	@Override
 	public String defineRole() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Member";
 	}
-	
 
 	public void showMenu() {
 	    Scanner scanner = new Scanner(System.in);
@@ -83,7 +81,9 @@ public class Member extends LibraryUser { // implements Authentication
 	// This method is needed to access all books in the library, 
 	//since we can't access them directly, we have to use polymprphism
 	public void browseBooks() {
+		System.out.println("\n----- Available Books -----");
 	    library.showAllBooks();
+	    System.out.println("---------------------------");
 	}
 	
 	@Override
@@ -111,6 +111,20 @@ public class Member extends LibraryUser { // implements Authentication
 	public void setOutstandingFines(double d) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	
+
+	@Override
+	public boolean authenticate(String inputPin) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean returnIPassOrNoPass() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
 
