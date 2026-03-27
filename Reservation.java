@@ -30,7 +30,7 @@ public class Reservation {
     public String getReservationInfo() {
         return "Reservation ID: " + reservationId
                 + ", Book: " + book.getTitle()
-                + ", Member ID: " + member.getMemberId()
+                + ", Member ID: " + member.getId()
                 + ", Active: " + active;
     }
 }

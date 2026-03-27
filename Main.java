@@ -81,11 +81,11 @@ public class Main {
 	
 	// Adding some books to our library. Note that Book id = to isbn
 	public static void seedBooks(Library libraryCityLibrary) {
-	    libraryCityLibrary.addBook(new Book("978", "The Great Gatsby", "F. Scott Fitzgerald", "978"));
-	    libraryCityLibrary.addBook(new Book("979", "To Kill a Mockingbird", "Harper Lee", "979"));
-	    libraryCityLibrary.addBook(new Book("976", "1984", "George Orwell", "976"));
-	    libraryCityLibrary.addBook(new Book("975", "Pride and Prejudice", "Jane Austen", "975"));
-	    libraryCityLibrary.addBook(new Book("974", "The Catcher in the Rye", "J.D. Salinger", "974"));
+	    libraryCityLibrary.addBook(new Book("B1", "The Great Gatsby", "F. Scott Fitzgerald", "978"));
+	    libraryCityLibrary.addBook(new Book("B2", "To Kill a Mockingbird", "Harper Lee", "979"));
+	    libraryCityLibrary.addBook(new Book("B3", "1984", "George Orwell", "976"));
+	    libraryCityLibrary.addBook(new Book("B4", "Pride and Prejudice", "Jane Austen", "975"));
+	    libraryCityLibrary.addBook(new Book("B5", "The Catcher in the Rye", "J.D. Salinger", "974"));
 	}
 	
 	
