@@ -55,6 +55,13 @@ public class Main {
 		}
 		
 	}
+	
+	public static void checkExit(String input) {
+		if(input.equalsIgnoreCase("X")) {
+			System.out.println("\nGoodbye! Come again to the City Library. ");
+			System.exit(0); // We completely exit out of the program here.
+		}
+	}
 	// Adding some seed users and one librarian
 	public static void seedUsers(Library libraryCityLibrary) {
         library.addUser(new Member( "Angelina", "018134168", "angelina.ryabechenkova@sjsu.edu", "4254290000"));
