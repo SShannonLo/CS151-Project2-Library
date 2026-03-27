@@ -1,29 +1,41 @@
 public class LibraryCard {
     private String cardId;
     private Member member;
-    private boolean isActive;
+    private String expirationDate;
 
-    public LibraryCard(String cardId, Member member) {
+    public LibraryCard(String cardId, Member member, String expirationDate) {
         this.cardId = cardId;
         this.member = member;
-        this.isActive = false;
+        this.expirationDate = expirationDate;
     }
 
     public void activateCard() {
-        isActive = true;
         System.out.println("Card activated.");
     }
 
     public void deactivateCard() {
-        isActive = false;
         System.out.println("Card deactivated.");
     }
 
     public boolean checkValidity() {
-        return isActive;
+        return true;
+    }
+    
+    public void renewCard(String newExpirationDate) {
+        this.expirationDate = newExpirationDate;
+        System.out.println("Card renewed until " + expirationDate);
+    } 
+
+    public String getCardId() {
+        return cardId;
     }
 
-    public void renewCard() {
-        System.out.println("Card renewed.");
+    public Member getMember() {
+        return member;
     }
+
+    public String getExpirationDate() {
+        return expirationDate;
+    }
+
 }
