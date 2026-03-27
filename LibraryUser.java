@@ -26,6 +26,10 @@ public abstract class LibraryUser {
 		return id;
 	}
 	
+	public String getPin() {
+		return pin;
+	}
+	
 	// Abstract method for an abstract class
 	public abstract String defineRole();
 }
