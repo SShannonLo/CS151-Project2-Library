@@ -13,7 +13,9 @@ public class Main {
 		seedUsers(libraryCityLibrary);
 		seedBooks(libraryCityLibrary);
 		
-		LibraryUser loggedInUser = askLoginAndAuthenticate(libraryCityLibrary);
+	    while (true) {
+	    	LibraryUser user = askLoginAndAuthenticate(libraryCityLibrary);
+	    }
 		
 	}
 	
