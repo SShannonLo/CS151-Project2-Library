@@ -14,8 +14,6 @@ public class Main {
 		
 		LibraryUser loggedInUser = askLoginAndAuthenticate(libraryCityLibrary);
 		
-		
-		
 	}
 	
 	// Outputs the greeting message to the console
@@ -41,19 +39,15 @@ public class Main {
 			
 			try {
 				// Try assigning these variables
-				int id = Integer.parseInt(idInput);
-				int pin = Integer.parseInt(pinInput);
-				
-				LibraryUser user = libraryCityLibrary.login(id, pin);
+				LibraryUser user = libraryCityLibrary.login(idInput, pinInput);
 				
 				// Depending of which user you have, show their menu
 				if (user instanceof Member) {
 				    Member member = (Member) user;
-				    showMemberMenu(member);
-
-				} else if (user instanceof Staff) {
-				    Staff staff = (Staff) user;
-				    showStaffMenu(staff);
+				    member.showMenu();
+				} else if (user instanceof LibraryStaff) {
+				    LibraryStaff staff = (LibraryStaff) user;
+				    staff.showMenu(staff);
 				}
 				
 				if(user != null) {
@@ -69,29 +63,6 @@ public class Main {
 		}
 		
 	}
-	
-	// Show menu for Members
-	private static void showMemberMenu(Member member) {
-		System.out.println("Welcome to the User menu " + member.getName() + "!");
-		
-		System.out.println("Enter 1 to view your profile, "
-				+ "enter 2 to browse new books, "
-				+ "enter 3 to ckeckout a new book, "
-				+ "enter 4 to pay outstanding fees, "
-				+ "enter 5 to close your account,"
-				+ "enter 6 to return a book you have,"
-				+ "enter 7 to exit. \n"
-				+ member.getName() + "!");
-		
-		
-	}
-	
-	// Show menu for Staff
-	private static void showStaffMenu(Member member) {
-			// TODO Auto-generated method stub
-			
-	}
-
 	public static void checkExit(String input) {
 		if(input.equalsIgnoreCase("X")) {
 			System.out.println("\nGoodbye! Come again to the City Library. ");
@@ -100,9 +71,20 @@ public class Main {
 	}
 	// Adding some seed users and one librarian
 	public static void seedUsers(Library libraryCityLibrary) {
-        libraryCityLibrary.addUser(new Member( "Angelina", "018134168", "angelina.ryabechenkova@sjsu.edu", "4254290000", "00"));
-        libraryCityLibrary.addUser(new Member("David", "018134169", "david.doe@sjsu.edu", "4254291111", "11"));
-       // library.addUser(new Staff("Librarian Bob","110110110", "bob.bookson@sjsu.edu", "4254292222"));
+        libraryCityLibrary.addUser(new Member( "Angelina", "018134168", "angelina.ryabechenkova@sjsu.edu", "4254290000", "00", libraryCityLibrary));
+        libraryCityLibrary.addUser(new Member("David", "018134169", "david.doe@sjsu.edu", "4254291111", "11", libraryCityLibrary));
+        libraryCityLibrary.addUser(new LibraryStaff("Librarian Bob","110110110", "22", "bob.bookson@sjsu.edu", "4254292222", "Staff"));
     }
 	
+	// Adding some books to our library.
+	public static void seedBooks(Library libraryCityLibrary) {
+	    libraryCityLibrary.addBook(new Book("The Great Gatsby", "F. Scott Fitzgerald", "978"));
+	    libraryCityLibrary.addBook(new Book("To Kill a Mockingbird", "Harper Lee", "979"));
+	    libraryCityLibrary.addBook(new Book("1984", "George Orwell", "976"));
+	    libraryCityLibrary.addBook(new Book("Pride and Prejudice", "Jane Austen", "975"));
+	    libraryCityLibrary.addBook(new Book("The Catcher in the Rye", "J.D. Salinger", "974"));
+	}
+	
+	
 }
+

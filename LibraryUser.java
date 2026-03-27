@@ -11,6 +11,8 @@ public abstract class LibraryUser {
 		this.id = id;
 		this.pin = pin;
 		this.name = name;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
 		
 	}
 	
@@ -26,6 +28,19 @@ public abstract class LibraryUser {
 		return id;
 	}
 	
+	public String getPin() {
+		return pin;
+	}
+	
 	// Abstract method for an abstract class
 	public abstract String defineRole();
+	
+	@Override
+	public String toString() {
+	    return "Name: " + name +
+	           "\nID: " + id +
+	           "\nEmail: " + email +
+	           "\nPhone: " + phoneNumber +
+	           "\nRole: " + defineRole();
+	}
 }
