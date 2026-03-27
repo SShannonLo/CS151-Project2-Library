@@ -15,7 +15,7 @@ public class Reservation {
         this.book = book;
         this.member = member;
         this.active = true;
-        System.out.println("Reservation created.");
+        System.out.println("Reservation created for book: " + book.getTitle());
     }
 
     public void cancelReservation() {
@@ -28,8 +28,9 @@ public class Reservation {
     }
 
     public String getReservationInfo() {
-        return "Reservation ID: " + reservationId +
-               ", Book: " + book.getTitle() +
-               ", Member: " + member.getName();
+        return "Reservation ID: " + reservationId
+                + ", Book: " + book.getTitle()
+                + ", Member ID: " + member.getMemberId()
+                + ", Active: " + active;
     }
 }
