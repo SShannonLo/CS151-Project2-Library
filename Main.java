@@ -41,19 +41,15 @@ public class Main {
 			
 			try {
 				// Try assigning these variables
-				int id = Integer.parseInt(idInput);
-				int pin = Integer.parseInt(pinInput);
-				
-				LibraryUser user = libraryCityLibrary.login(id, pin);
+				LibraryUser user = libraryCityLibrary.login(idInput, pinInput);
 				
 				// Depending of which user you have, show their menu
 				if (user instanceof Member) {
 				    Member member = (Member) user;
-				    showMemberMenu(member);
-
-				} else if (user instanceof Staff) {
-				    Staff staff = (Staff) user;
-				    showStaffMenu(staff);
+				    member.showMenu();
+//				} else if (user instanceof Staff) {
+//				    Staff staff = (Staff) user;
+//				    staff.showMenu(staff);
 				}
 				
 				if(user != null) {
@@ -69,29 +65,6 @@ public class Main {
 		}
 		
 	}
-	
-	// Show menu for Members
-	private static void showMemberMenu(Member member) {
-		System.out.println("Welcome to the User menu " + member.getName() + "!");
-		
-		System.out.println("Enter 1 to view your profile, "
-				+ "enter 2 to browse new books, "
-				+ "enter 3 to ckeckout a new book, "
-				+ "enter 4 to pay outstanding fees, "
-				+ "enter 5 to close your account,"
-				+ "enter 6 to return a book you have,"
-				+ "enter 7 to exit. \n"
-				+ member.getName() + "!");
-		
-		
-	}
-	
-	// Show menu for Staff
-	private static void showStaffMenu(Member member) {
-			// TODO Auto-generated method stub
-			
-	}
-
 	public static void checkExit(String input) {
 		if(input.equalsIgnoreCase("X")) {
 			System.out.println("\nGoodbye! Come again to the City Library. ");
@@ -100,9 +73,11 @@ public class Main {
 	}
 	// Adding some seed users and one librarian
 	public static void seedUsers(Library libraryCityLibrary) {
-        libraryCityLibrary.addUser(new Member( "Angelina", "018134168", "angelina.ryabechenkova@sjsu.edu", "4254290000", "00"));
-        libraryCityLibrary.addUser(new Member("David", "018134169", "david.doe@sjsu.edu", "4254291111", "11"));
+        libraryCityLibrary.addUser(new Member( "Angelina", "018134168", "angelina.ryabechenkova@sjsu.edu", "4254290000", "00", libraryCityLibrary));
+        libraryCityLibrary.addUser(new Member("David", "018134169", "david.doe@sjsu.edu", "4254291111", "11", libraryCityLibrary));
        // library.addUser(new Staff("Librarian Bob","110110110", "bob.bookson@sjsu.edu", "4254292222"));
     }
 	
+	
 }
+
