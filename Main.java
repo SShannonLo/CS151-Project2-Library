@@ -44,7 +44,7 @@ public class Main {
 				
 				if(user != null) {
 					return user;
-				}
+ 				}
 				
 				System.out.println("Invalid. Please try again. \n");
 			} catch (NumberFormatException e) {
