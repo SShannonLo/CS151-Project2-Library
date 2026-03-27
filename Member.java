@@ -33,13 +33,13 @@ public class Member extends LibraryUser{
         return phoneNumber;
     }
 
-    public double getFineAmount() {
-        return fineAmount;
-    }
+    //public double getFineAmount() {
+    //    return fineAmount;
+    //}
 
-    public void addFine(double amount) {
-        fineAmount += amount;
-    }
+    //public void addFine(double amount) {
+    //    fineAmount += amount;
+    //}
 
 	@Override
 	public String defineRole() {

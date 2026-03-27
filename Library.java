@@ -1,7 +1,7 @@
 import java.util.HashMap;
 import java.util.ArrayList;
 
-public class Library extends LibraryUser{ // extends the abstract class LibraryUser
+public class Library{ 
 	
 	// These fields are for ease of adjustments. They can be hardcoded instead if needed.
 	private String libraryName;
@@ -13,12 +13,13 @@ public class Library extends LibraryUser{ // extends the abstract class LibraryU
 	private int maxUsers;
 	private int maxBooks;
 	
-	private HashMap<Integer, LibraryUser> users; // includes both Member and Staff
+	private HashMap<String, LibraryUser> users; // includes both Member and Staff
 	private HashMap<String, Book> books; // All books are differentiated by ISBN# 
 	
 	// Library constructor. We will only have one Librray
 	public Library(String name, String address, String openTime, String closeTime, 
 			String weekendHours, int maxUsers, int maxBooks) {
+		
 		// General information about the library.
 		this.libraryName = name;
         this.libraryAddress = address;
@@ -74,6 +75,7 @@ public class Library extends LibraryUser{ // extends the abstract class LibraryU
 			System.out.println(book);
 		}
 	}
+
 	
 	
 }
