@@ -45,7 +45,7 @@ public class Library extends LibraryUser{ // extends the abstract class LibraryU
     }
 	
 	// Authentication procedure
-	public LibraryUser login (int id, int pin) {
+	public LibraryUser login(int id, int pin) {
 		LibraryUser user = users.get(id);
 		
 		// If the user exists (avoids errors) and entered correct credentials, return their info
