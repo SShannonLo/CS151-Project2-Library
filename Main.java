@@ -46,6 +46,16 @@ public class Main {
 				
 				LibraryUser user = libraryCityLibrary.login(id, pin);
 				
+				// Depending of which user you have, show their menu
+				if (user instanceof Member) {
+				    Member member = (Member) user;
+				    showMemberMenu(member);
+
+				} else if (user instanceof Staff) {
+				    Staff staff = (Staff) user;
+				    showStaffMenu(staff);
+				}
+				
 				if(user != null) {
 					return user;
  				}
@@ -60,6 +70,28 @@ public class Main {
 		
 	}
 	
+	// Show menu for Members
+	private static void showMemberMenu(Member member) {
+		System.out.println("Welcome to the User menu " + member.getName() + "!");
+		
+		System.out.println("Enter 1 to view your profile, "
+				+ "enter 2 to browse new books, "
+				+ "enter 3 to ckeckout a new book, "
+				+ "enter 4 to pay outstanding fees, "
+				+ "enter 5 to close your account,"
+				+ "enter 6 to return a book you have,"
+				+ "enter 7 to exit. \n"
+				+ member.getName() + "!");
+		
+		
+	}
+	
+	// Show menu for Staff
+	private static void showStaffMenu(Member member) {
+			// TODO Auto-generated method stub
+			
+	}
+
 	public static void checkExit(String input) {
 		if(input.equalsIgnoreCase("X")) {
 			System.out.println("\nGoodbye! Come again to the City Library. ");
