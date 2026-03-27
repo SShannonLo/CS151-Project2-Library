@@ -46,4 +46,9 @@ public class Member extends LibraryUser{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public void showMenu() {
+	    System.out.println("Member menu here...");
+	}
 }
