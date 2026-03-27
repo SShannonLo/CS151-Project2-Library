@@ -26,13 +26,34 @@ public class Main {
 	
 	// User authentication
 	public static LibraryUser askLoginAndAuthenticate(Library libraryCityLibrary) {
-		System.out.println("Enter your numeric ID, please: ");
-		int id = scanner.nextInt();
 		
-		System.out.println("Enter your numeric PIN, please: ");
-		int pin = scanner.nextInt();
+		// Keep waiting for the user to give correct input.
+		while(true) {
+			System.out.println("Enter your numeric ID, or X to exit, please: ");
+			checkExit(idInput);
 		
-		return libraryCityLibrary.login(id, pin);
+			System.out.println("Enter your numeric PIN, or X to exit, please: ");
+			checkExit(pinInput);
+			
+			try {
+				// Try assigning these variables
+				int id = Integer.parseInt(idInput);
+				int pin = Integer.parseInt(pinInput);
+				
+				LibraryUser user = libraryCityLibrary.login(id, pin);
+				
+				if(user != null) {
+					return user;
+				}
+				
+				System.out.println("Invalid. Please try again. \n");
+			} catch (NumberFormatException e) {
+				
+				System.out.println("Please, enter valid numbers. \n");
+			}
+			
+		}
+		
 	}
 	// Adding some seed users and one librarian
 	public static void seedUsers(Library libraryCityLibrary) {
