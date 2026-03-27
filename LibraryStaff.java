@@ -1,5 +1,5 @@
 // LibraryStaff class - represents an employee who works at the library
-// extends LibraryUser which holds shared info like name, email, phone
+// extends LibraryUser which holds shared info like name, id, email, phone
 // implements Authentication so staff can log in with their credentials
 public class LibraryStaff extends LibraryUser implements Authentication {
 
@@ -7,8 +7,8 @@ public class LibraryStaff extends LibraryUser implements Authentication {
     private String role;
 
     // constructor - creates a new library staff member
-    public LibraryStaff(String name, String staffId, String email, String phone, String role) {
-        super(name, staffId, email, phone);
+    public LibraryStaff(String name, String staffId, String pin, String email, String phone, String role) {
+        super(staffId, pin, name, phone, email);
         this.staffId = staffId;
         this.role = role;
     }
