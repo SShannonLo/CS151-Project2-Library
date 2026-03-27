@@ -45,6 +45,10 @@ public class Library{
 
     }
 	
+	public boolean removeUser(String id) {
+	    return users.remove(id) != null;
+	}
+	
 	// Authentication procedure
 	public LibraryUser login(String id, String pin) {
 	    LibraryUser user = users.get(id);
