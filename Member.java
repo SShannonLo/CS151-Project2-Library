@@ -48,7 +48,7 @@ public class Member extends LibraryUser implements Authentication{
 	            case "1": System.out.println(this); break;
 	            case "2": browseBooks(); break;
 	            case "3": checkoutBook(); break;
-	            //case "4": payFees(); break;
+	            case "4": payFees(); break;
 	            case "5": if (closeAccount()) {
 	                			return;
 	            			}
@@ -190,6 +190,55 @@ public class Member extends LibraryUser implements Authentication{
 	    library.showAllBooks();
 	    System.out.println("---------------------------");
 	}
+	
+	public void payFees() {
+	    Scanner scanner = new Scanner(System.in);
+
+	    if (fines <= 0) {
+	        System.out.println("You have no outstanding fees.");
+	        return;
+	    }
+
+	    System.out.println("Outstanding fees: $" + fines);
+	    System.out.print("Enter payment amount: $");
+
+	    double payment;
+	    try {
+	        payment = Double.parseDouble(scanner.nextLine());
+	    } catch (NumberFormatException e) {
+	        System.out.println("Invalid payment amount.");
+	        return;
+	    }
+
+	    if (payment <= 0) {
+	        System.out.println("Payment must be greater than 0.");
+	        return;
+	    }
+
+	    if (payment >= fines) {
+	        double change = payment - fines;
+	        fines = 0.0;
+	        System.out.println("Fees paid in full.");
+	        if (change > 0) {
+	            System.out.println("Change: $" + change);
+	        }
+	    } else {
+	        fines -= payment;
+	        System.out.println("Partial payment accepted.");
+	        System.out.println("Remaining balance: $" + fines);
+	    }
+	}
+	
+	public void addFine(double amount) {
+	    if (amount > 0) {
+	        fines += amount;
+	    }
+	}
+	
+	public double getFines() {
+	    return fines;
+	}
+	
 	
 	@Override
 	public String toString() {
