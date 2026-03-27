@@ -14,9 +14,26 @@ public class LibraryStaff extends LibraryUser implements Authentication {
     }
 
     // tells us what a staff member is allowed to do in the system
-    @Override
     public String getPermissions() {
         return "Staff can add/remove books, register members, and waive fines";
+    }
+
+    // defines the role of this user in the system
+    @Override
+    public String defineRole() {
+        return "Staff";
+    }
+
+    // checks if the entered pin matches the staff member's pin
+    @Override
+    public boolean authenticate(String inputPin) {
+        return this.pin.equals(inputPin);
+    }
+
+    // returns true if authentication passed
+    @Override
+    public boolean returnIPassOrNoPass() {
+        return true;
     }
 
     // adds a new member to the library
