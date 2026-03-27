@@ -1,18 +1,20 @@
 
 import java.util.Scanner; // Keeping imports to the minimum
 public class Main {
-	private static String greeting = "            Welcome to the library system!";
+	private static String greeting = "              Welcome to the library system!";
 	private static Scanner scanner = new Scanner(System.in);
 	
 	public static void main(String[] args) {
 		// We could scale it to multiple libraries if we need to.
 		Library libraryCityLibrary = new Library("City Library", "123 Main St", "9:00 AM", 
 				"6:00 PM", "10:00 AM - 4:00 PM", 100, 100);
-				
-		giveGreeting(libraryCityLibrary);
+		
+		// Seed users and books first, before giving the greeting.
 		seedUsers(libraryCityLibrary);
 		seedBooks(libraryCityLibrary);
+		giveGreeting(libraryCityLibrary);
 		
+		// Spin loop that keeps printing the menu for Library Users to decide what they wan to do.
 	    while (true) {
 	    	LibraryUser user = askLoginAndAuthenticate(libraryCityLibrary);
 	    }
@@ -24,7 +26,8 @@ public class Main {
 		System.out.println("_____________^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^_____________");
 		System.out.println(greeting);
 		System.out.println("_____________^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^_____________");
-		System.out.println(libraryCityLibrary.activeHours());
+		System.out.println(libraryCityLibrary.toString());
+		System.out.println("_________________________________________________________");
 	}
 	
 	// User authentication
