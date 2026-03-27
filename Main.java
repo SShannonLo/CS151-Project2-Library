@@ -76,6 +76,15 @@ public class Main {
        // library.addUser(new Staff("Librarian Bob","110110110", "bob.bookson@sjsu.edu", "4254292222"));
     }
 	
+	// Adding some books to our library.
+	public static void seedBooks(Library libraryCityLibrary) {
+	    libraryCityLibrary.addBook(new Book("The Great Gatsby", "F. Scott Fitzgerald", "978"));
+	    libraryCityLibrary.addBook(new Book("To Kill a Mockingbird", "Harper Lee", "979"));
+	    libraryCityLibrary.addBook(new Book("1984", "George Orwell", "976"));
+	    libraryCityLibrary.addBook(new Book("Pride and Prejudice", "Jane Austen", "975"));
+	    libraryCityLibrary.addBook(new Book("The Catcher in the Rye", "J.D. Salinger", "974"));
+	}
+	
 	
 }
 

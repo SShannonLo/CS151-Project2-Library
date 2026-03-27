@@ -34,4 +34,13 @@ public abstract class LibraryUser {
 	
 	// Abstract method for an abstract class
 	public abstract String defineRole();
+	
+	@Override
+	public String toString() {
+	    return "Name: " + name +
+	           "\nID: " + id +
+	           "\nEmail: " + email +
+	           "\nPhone: " + phoneNumber +
+	           "\nRole: " + defineRole();
+	}
 }
