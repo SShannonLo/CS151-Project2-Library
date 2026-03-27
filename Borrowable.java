@@ -4,4 +4,5 @@ public interface Borrowable{
     boolean returnBook();
     void markOverDue();
     boolean reserve(String memberId);
+	boolean reserveBook(String memberId);
 }
