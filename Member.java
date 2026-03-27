@@ -8,18 +8,20 @@ public class Member extends LibraryUser{
     
     private String name;
     private String phoneNumber;
+    private String email;
+    private int memberId;
 
     
-    public Member(String name, String memberId, String email, String phoneNumber) {
+    public Member(String name, String memberId, String email, String phoneNumber, String pin) {
     	// Assuming LibraryUser constructor has name, id, email, and phone fields, as per the UML
-    	super(name, memberId, email, phoneNumber);
+    	super(memberId, pin, name, phoneNumber, email);
     	
         this.role = role; // preassigned
         this.fines = 0.0; // 0.0 for new users
         this.borrowedBooks = new ArrayList<>();
     }
 
-    public String getMemberId() {
+    public int getMemberId() {
         return memberId;
     }
 
@@ -38,4 +40,10 @@ public class Member extends LibraryUser{
     public void addFine(double amount) {
         fineAmount += amount;
     }
+
+	@Override
+	public String defineRole() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
