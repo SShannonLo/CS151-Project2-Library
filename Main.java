@@ -5,14 +5,16 @@ public class Main {
 	private static Scanner scanner = new Scanner(System.in);
 	
 	public static void main(String[] args) {
+		// We could scale it to multiple libraries if we need to.
+		Library libraryCityLibrary = new Library("City Library", "123 Main St", "9:00 AM", 
+				"6:00 PM", "10:00 AM - 4:00 PM", 100, 100);
+				
 		giveGreeting(libraryCityLibrary);
 		seedUsers(libraryCityLibrary);
 		
 		LibraryUser loggedInUser = askLoginAndAuthenticate(libraryCityLibrary);
 		
-		// We could scale it to multiple libraries if we need to.
-		Library libraryCityLibrary = new Library("City Library", "123 Main St", "9:00 AM", 
-				"6:00 PM", "10:00 AM - 4:00 PM", 100, 100);
+		
 		
 	}
 	
@@ -30,9 +32,11 @@ public class Main {
 		// Keep waiting for the user to give correct input.
 		while(true) {
 			System.out.println("Enter your numeric ID, or X to exit, please: ");
+			String idInput = scanner.nextLine();
 			checkExit(idInput);
 		
 			System.out.println("Enter your numeric PIN, or X to exit, please: ");
+			String pinInput = scanner.nextLine();
 			checkExit(pinInput);
 			
 			try {
@@ -64,9 +68,9 @@ public class Main {
 	}
 	// Adding some seed users and one librarian
 	public static void seedUsers(Library libraryCityLibrary) {
-        library.addUser(new Member( "Angelina", "018134168", "angelina.ryabechenkova@sjsu.edu", "4254290000"));
-        library.addUser(new Member("David", "018134169", "david.doe@sjsu.edu", "4254291111"));
-        library.addUser(new Staff("Librarian Bob","110110110", "bob.bookson@sjsu.edu", "4254292222"));
+        libraryCityLibrary.addUser(new Member( "Angelina", "018134168", "angelina.ryabechenkova@sjsu.edu", "4254290000", "00"));
+        libraryCityLibrary.addUser(new Member("David", "018134169", "david.doe@sjsu.edu", "4254291111", "11"));
+       // library.addUser(new Staff("Librarian Bob","110110110", "bob.bookson@sjsu.edu", "4254292222"));
     }
 	
 }
