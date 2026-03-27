@@ -11,6 +11,7 @@ public class Main {
 				
 		giveGreeting(libraryCityLibrary);
 		seedUsers(libraryCityLibrary);
+		seedBooks(libraryCityLibrary);
 		
 		LibraryUser loggedInUser = askLoginAndAuthenticate(libraryCityLibrary);
 		
@@ -76,13 +77,13 @@ public class Main {
         libraryCityLibrary.addUser(new LibraryStaff("Librarian Bob","110110110", "22", "bob.bookson@sjsu.edu", "4254292222", "Staff"));
     }
 	
-	// Adding some books to our library.
+	// Adding some books to our library. Note that Book id = to isbn
 	public static void seedBooks(Library libraryCityLibrary) {
-	    libraryCityLibrary.addBook(new Book("The Great Gatsby", "F. Scott Fitzgerald", "978"));
-	    libraryCityLibrary.addBook(new Book("To Kill a Mockingbird", "Harper Lee", "979"));
-	    libraryCityLibrary.addBook(new Book("1984", "George Orwell", "976"));
-	    libraryCityLibrary.addBook(new Book("Pride and Prejudice", "Jane Austen", "975"));
-	    libraryCityLibrary.addBook(new Book("The Catcher in the Rye", "J.D. Salinger", "974"));
+	    libraryCityLibrary.addBook(new Book("978", "The Great Gatsby", "F. Scott Fitzgerald", "978"));
+	    libraryCityLibrary.addBook(new Book("979", "To Kill a Mockingbird", "Harper Lee", "979"));
+	    libraryCityLibrary.addBook(new Book("976", "1984", "George Orwell", "976"));
+	    libraryCityLibrary.addBook(new Book("975", "Pride and Prejudice", "Jane Austen", "975"));
+	    libraryCityLibrary.addBook(new Book("974", "The Catcher in the Rye", "J.D. Salinger", "974"));
 	}
 	
 	

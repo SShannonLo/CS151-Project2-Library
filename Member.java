@@ -71,9 +71,17 @@ public class Member extends LibraryUser implements Authentication{
 	    }
 	    String loanId = "L" + System.currentTimeMillis();
 	    Loan loan = new Loan(loanId, this, book);
-	    book.setAvailable(false);
-	    borrowedBooks.add(book);
-	    loans.add(loan);
+	    
+	    if (book.checkOut(this.getId())) {
+	        borrowedBooks.add(book);
+	        loans.add(loan);
+	        System.out.println("Checkout successful!");
+	        System.out.println("Book: " + book.getTitle());
+	        System.out.println("Due date: " + loan.getDueDate());
+	    } else {
+	        System.out.println("Checkout failed.");
+	    }
+	    
 	    System.out.println("Checkout successful!");
 	    System.out.println("Book: " + book.getTitle());
 	    System.out.println("Due date: " + loan.getDueDate());
