@@ -25,7 +25,6 @@ public class Catalog{
             return false;
         }
         books.add(book);
-        System.out.println("Book added to catalog successfully");
         return true;
     }
 
@@ -71,14 +70,17 @@ public class Catalog{
         return result;
     }
 
-    public void displayAllBooks(){
-        if(book.isEmpty()){
+    public void displayAllBooks() {
+        if (books.isEmpty()) {
             System.out.println("No books in catalog");
             return;
         }
-        for(Book book : books){
-            System.out.println(book);
-        }        
+
+        for (Book book : books) {
+            if (book.isAvailable()) {
+                System.out.println(book);
+            }
+        }
     }
 
     public int countAvailableBooks(){

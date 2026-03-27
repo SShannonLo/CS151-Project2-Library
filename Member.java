@@ -7,16 +7,22 @@ public class Member extends LibraryUser implements Authentication{
     private ArrayList<Book> borrowedBooks; // each member has a list of books under their name
     private ArrayList<Loan> loans;
     private Library library; // Giving access to library, since I dont inherit from it
+    private LibraryCard libraryCard;
     
     public Member(String name, String memberId, String email, String phoneNumber, String pin, Library library) {
-    	// Assuming LibraryUser constructor has name, id, email, and phone fields, as per the UML
-    	super(memberId, pin, name, phoneNumber, email);
-    	
-    	this.library = library;
-        //this.role = role; // preassigned
-        this.fines = 0.0; // 0.0 for new users
+        super(memberId, pin, name, phoneNumber, email);
+
+        this.library = library;
+        this.role = "library member";
+        this.fines = 0.0;
         this.borrowedBooks = new ArrayList<>();
         this.loans = new ArrayList<>();
+
+        this.libraryCard = new LibraryCard("CARD-" + memberId, this, "2027-12-31");
+    }
+    
+    public LibraryCard getLibraryCard() {
+        return libraryCard;
     }
     
     public String getPin() {
@@ -69,7 +75,7 @@ public class Member extends LibraryUser implements Authentication{
 
 	    if (fines > 0) {
 	        System.out.println("Account cannot be closed. Outstanding fines: $" + fines);
-	        return true;
+	        return false;
 	    }
 
 	    System.out.print("Are you sure you want to close your account? (Y/N): ");
@@ -84,6 +90,7 @@ public class Member extends LibraryUser implements Authentication{
 
 	    if (removed) {
 	        System.out.println("Your account has been closed successfully.");
+	        libraryCard.deactivateCard();
 	        return true;
 	    } else {
 	        System.out.println("Account closure failed.");
@@ -93,20 +100,29 @@ public class Member extends LibraryUser implements Authentication{
 
 	public void checkoutBook() {
 	    Scanner scanner = new Scanner(System.in);
-	    System.out.print("Enter ISBN of the book to check out: ");
-	    String isbn = scanner.nextLine();
-	    Book book = library.getBook(isbn);
+
+	    if (!libraryCard.checkValidity()) {
+	        System.out.println("Your library card is not valid.");
+	        return;
+	    }
+
+	    System.out.print("Enter Book ID of the book to check out: ");
+	    String bookId = scanner.nextLine();
+
+	    Book book = library.getBook(bookId);
 	    if (book == null) {
 	        System.out.println("Book not found.");
 	        return;
 	    }
+
 	    if (!book.isAvailable()) {
 	        System.out.println("That book is already checked out.");
 	        return;
 	    }
+
 	    String loanId = "L" + System.currentTimeMillis();
 	    Loan loan = new Loan(loanId, this, book);
-	    
+
 	    if (book.checkOut(this.getId())) {
 	        borrowedBooks.add(book);
 	        loans.add(loan);
@@ -116,10 +132,6 @@ public class Member extends LibraryUser implements Authentication{
 	    } else {
 	        System.out.println("Checkout failed.");
 	    }
-	    
-	    System.out.println("Checkout successful!");
-	    System.out.println("Book: " + book.getTitle());
-	    System.out.println("Due date: " + loan.getDueDate());
 	}
 	
 	public void returnBook() {
@@ -131,17 +143,17 @@ public class Member extends LibraryUser implements Authentication{
 	    }
 
 	    System.out.println("Your borrowed books:");
-	    for (Book book : borrowedBooks) {
-	        System.out.println(book);
+	    for (Book borrowedBook : borrowedBooks) {
+	        System.out.println(borrowedBook);
 	    }
 
-	    System.out.print("Enter ISBN of the book to return: ");
-	    String isbn = scanner.nextLine();
+	    System.out.print("Enter Book ID of the book to return: ");
+	    String bookId = scanner.nextLine();
 
 	    Book bookToReturn = null;
-	    for (Book book : borrowedBooks) {
-	        if (book.getIsbn().equals(isbn)) {
-	            bookToReturn = book;
+	    for (Book borrowedBook : borrowedBooks) {
+	        if (borrowedBook.getBookId().equals(bookId)) {
+	            bookToReturn = borrowedBook;
 	            break;
 	        }
 	    }
@@ -153,7 +165,7 @@ public class Member extends LibraryUser implements Authentication{
 
 	    Loan matchingLoan = null;
 	    for (Loan loan : loans) {
-	        if (loan.getBook().getIsbn().equals(isbn) && !loan.isReturned()) {
+	        if (loan.getBook().getBookId().equals(bookId) && !loan.isReturned()) {
 	            matchingLoan = loan;
 	            break;
 	        }
@@ -255,6 +267,8 @@ public class Member extends LibraryUser implements Authentication{
 	            sb.append("  - ").append(book.getTitle()).append("\n");
 	        }
 	    }
+	    sb.append("Library Card ID: ").append(libraryCard.getCardId()).append("\n");
+	    sb.append("Card Expiration: ").append(libraryCard.getExpirationDate()).append("\n");
 	    sb.append("--------------------------");
 	    return sb.toString();
 	}
