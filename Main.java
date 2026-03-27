@@ -14,8 +14,6 @@ public class Main {
 		
 		LibraryUser loggedInUser = askLoginAndAuthenticate(libraryCityLibrary);
 		
-		
-		
 	}
 	
 	// Outputs the greeting message to the console

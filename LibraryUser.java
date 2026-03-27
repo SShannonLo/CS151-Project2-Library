@@ -11,6 +11,8 @@ public abstract class LibraryUser {
 		this.id = id;
 		this.pin = pin;
 		this.name = name;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
 		
 	}
 	

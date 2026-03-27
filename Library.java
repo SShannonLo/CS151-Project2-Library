@@ -47,17 +47,13 @@ public class Library{
 	
 	// Authentication procedure
 	public LibraryUser login(String id, String pin) {
-		for (int i = 0; i < users.size(); i++) {
-	        LibraryUser user = users.get(i);
+	    LibraryUser user = users.get(id);
 
-	        if (user == null) continue;
-	        
-	        if (user.getId().equals(id) && user.getPin().equals(pin)) {
-	            return user;
-	        }
+	    if (user != null && user.getPin().equals(pin)) {
+	        return user;
 	    }
-		
-	    return null; // In case authentication failed
+
+	    return null;
 	}
 	
 	// Add book to the HashMap of all books

@@ -7,10 +7,6 @@ public class Member extends LibraryUser { // implements Authentication
     private ArrayList<Book> borrowedBooks; // each member has a list of books under their name
     private ArrayList<Loan> loans;
     
-    private String name;
-    private String phoneNumber;
-    private String email;
-    private int memberId;
     private Library library; // Giving access to library, since I dont inherit from it
     
     public Member(String name, String memberId, String email, String phoneNumber, String pin, Library library) {
@@ -18,25 +14,16 @@ public class Member extends LibraryUser { // implements Authentication
     	super(memberId, pin, name, phoneNumber, email);
     	
     	this.library = library;
-        this.role = role; // preassigned
+        //this.role = role; // preassigned
         this.fines = 0.0; // 0.0 for new users
         this.borrowedBooks = new ArrayList<>();
+        this.loans = new ArrayList<>();
     }
-    public int getMemberId() {
-        return memberId;
+    
+    public String getPin() {
+        return pin;
     }
-    public String getName() {
-        return name;
-    }
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-    //public double getFineAmount() {
-    //    return fineAmount;
-    //}
-    //public void addFine(double amount) {
-    //    fineAmount += amount;
-    //}
+
 	@Override
 	public String defineRole() {
 		// TODO Auto-generated method stub
