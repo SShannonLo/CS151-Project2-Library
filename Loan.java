@@ -1,76 +1,105 @@
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
+// Loan class - represents a single borrowing transaction
+// tracks which member borrowed which book and handles fines
 public class Loan {
 
+    // fine amount per day overdue
+    private static final double FINE_PER_DAY = 0.25;
+
     private String loanId;
-    private String memberName;
-    private String bookTitle;
-    private LocalDate checkoutDate;
+    private Member member;
+    private Book book;
+    private LocalDate borrowDate;
     private LocalDate dueDate;
+    private LocalDate returnDate;
     private boolean isReturned;
     private double fine;
 
-    public Loan(String loanId, String memberName, String bookTitle, LocalDate checkoutDate, LocalDate dueDate) {
+    // constructor - creates a new loan for a member borrowing a book
+    public Loan(String loanId, Member member, Book book) {
         this.loanId = loanId;
-        this.memberName = memberName;
-        this.bookTitle = bookTitle;
-        this.checkoutDate = checkoutDate;
-        this.dueDate = dueDate;
+        this.member = member;
+        this.book = book;
+        this.borrowDate = LocalDate.now();
+        this.dueDate = LocalDate.now().plusDays(14);
         this.isReturned = false;
         this.fine = 0.0;
     }
 
-    // returns true if the book is past its due date
-    public boolean isOverdue() {
-        return !isReturned && LocalDate.now().isAfter(dueDate);
-    }
-
-    // calculates the fine based on how many days overdue at 25 cents per day
+    // calculates fine based on how many days overdue the book is
     public double calculateFine() {
         if (!isOverdue()) {
             return 0.0;
         }
-        long daysOverdue = java.time.temporal.ChronoUnit.DAYS.between(dueDate, LocalDate.now());
-        fine = daysOverdue * 0.25;
+        long daysOverdue = ChronoUnit.DAYS.between(dueDate, LocalDate.now());
+        fine = daysOverdue * FINE_PER_DAY;
         return fine;
     }
 
-    // extends the due date by a number of days
+    // returns true if today is past the due date
+    public boolean isOverdue() {
+        if (isReturned) {
+            return false;
+        }
+        return LocalDate.now().isAfter(dueDate);
+    }
+
+    // extends the due date by a given number of days
     public void extendCheckout(int days) {
+        if (isReturned) {
+            System.out.println("Error: this loan is already closed.");
+            return;
+        }
+        if (days <= 0) {
+            System.out.println("Error: days must be a positive number.");
+            return;
+        }
         dueDate = dueDate.plusDays(days);
         System.out.println("Due date extended to: " + dueDate);
     }
 
-    // marks the book as returned and calculates any final fines
+    // marks the loan as returned and finalizes any fines
     public void processReturn() {
-        isReturned = true;
-        fine = calculateFine();
-        System.out.println("Book returned. Total fine: $" + fine);
+        if (isReturned) {
+            System.out.println("Error: book has already been returned.");
+            return;
+        }
+        this.returnDate = LocalDate.now();
+        this.isReturned = true;
+        this.fine = calculateFine();
+        book.setAvailable(true);
+        System.out.println("Book returned. Fine: $" + fine);
     }
 
-    // prints a summary of the loan
-    public void getSummary() {
-        System.out.println("Loan ID: " + loanId);
-        System.out.println("Book: " + bookTitle);
-        System.out.println("Member: " + memberName);
-        System.out.println("Due Date: " + dueDate);
-        System.out.println("Returned: " + isReturned);
-        System.out.println("Fine: $" + fine);
+    // returns a summary of the loan details
+    public String getSummary() {
+        return "Loan ID: " + loanId +
+                " | Member: " + member.getName() +
+                " | Book: " + book.getTitle() +
+                " | Due: " + dueDate +
+                " | Returned: " + isReturned +
+                " | Fine: $" + fine;
     }
 
+    // getters
     public String getLoanId() { return loanId; }
-    public String getMemberName() { return memberName; }
-    public String getBookTitle() { return bookTitle; }
-    public LocalDate getCheckoutDate() { return checkoutDate; }
+    public Member getMember() { return member; }
+    public Book getBook() { return book; }
+    public LocalDate getBorrowDate() { return borrowDate; }
     public LocalDate getDueDate() { return dueDate; }
-    public boolean getIsReturned() { return isReturned; }
+    public LocalDate getReturnDate() { return returnDate; }
+    public boolean isReturned() { return isReturned; }
     public double getFine() { return fine; }
 
-    public void setIsReturned(boolean isReturned) { this.isReturned = isReturned; }
+    // setters
+    public void setDueDate(LocalDate dueDate) { this.dueDate = dueDate; }
     public void setFine(double fine) { this.fine = fine; }
 
+    // prints out loan info
     @Override
     public String toString() {
-        return "Loan ID: " + loanId + " | Book: " + bookTitle + " | Member: " + memberName;
+        return getSummary();
     }
 }
