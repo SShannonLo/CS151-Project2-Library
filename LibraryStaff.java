@@ -27,9 +27,18 @@ public class LibraryStaff extends LibraryUser implements Authentication {
     }
 
     // checks if the entered pin matches the staff member's pin
+    // throws InvalidPinException if the pin is null or empty
     @Override
     public boolean authenticate(String inputPin) {
-        return this.pin.equals(inputPin);
+        try {
+            if (inputPin == null || inputPin.trim().isEmpty()) {
+                throw new InvalidPinException("Pin cannot be null or empty.");
+            }
+            return this.pin.equals(inputPin);
+        } catch (InvalidPinException e) {
+            System.out.println("Authentication error: " + e.getMessage());
+            return false;
+        }
     }
 
     // returns true if authentication passed
@@ -85,54 +94,74 @@ public class LibraryStaff extends LibraryUser implements Authentication {
     }
 
     // adds a new member to the library
+    // throws MemberNotFoundException if member is null
     public void registerMember(Member member, Library library) {
-        if (member == null) {
-            System.out.println("Error: member cannot be null.");
-            return;
+        try {
+            if (member == null) {
+                throw new MemberNotFoundException("Member cannot be null.");
+            }
+            library.addUser(member);
+            System.out.println(member.getName() + " has been registered.");
+        } catch (MemberNotFoundException e) {
+            System.out.println("Registration error: " + e.getMessage());
         }
-        library.addUser(member);
-        System.out.println(member.getName() + " has been registered.");
     }
 
     // adds a book to the library
+    // throws BookNotFoundException if book is null
     public void addBook(Book book, Library library) {
-        if (book == null) {
-            System.out.println("Error: book cannot be null.");
-            return;
+        try {
+            if (book == null) {
+                throw new BookNotFoundException("Book cannot be null.");
+            }
+            library.addBook(book);
+            System.out.println(book.getTitle() + " has been added.");
+        } catch (BookNotFoundException e) {
+            System.out.println("Add book error: " + e.getMessage());
         }
-        library.addBook(book);
-        System.out.println(book.getTitle() + " has been added.");
     }
 
     // removes a book from the library
+    // throws BookNotFoundException if book is null
     public void removeBook(Book book, Library library) {
-        if (book == null) {
-            System.out.println("Error: book cannot be null.");
-            return;
+        try {
+            if (book == null) {
+                throw new BookNotFoundException("Book cannot be null.");
+            }
+            library.removeBook(book);
+            System.out.println(book.getTitle() + " has been removed.");
+        } catch (BookNotFoundException e) {
+            System.out.println("Remove book error: " + e.getMessage());
         }
-        library.removeBook(book);
-        System.out.println(book.getTitle() + " has been removed.");
     }
 
     // waives all fines for a member
+    // throws MemberNotFoundException if member is null
     public void waiveFine(Member member) {
-        if (member == null) {
-            System.out.println("Error: member not found.");
-            return;
+        try {
+            if (member == null) {
+                throw new MemberNotFoundException("Member not found.");
+            }
+            double amount = member.getFines();
+            member.setOutstandingFines(0.0);
+            System.out.println("Waived $" + amount + " for " + member.getName());
+        } catch (MemberNotFoundException e) {
+            System.out.println("Waive fine error: " + e.getMessage());
         }
-        double amount = member.getFines();
-        member.setOutstandingFines(0.0);
-        System.out.println("Waived $" + amount + " for " + member.getName());
     }
 
     // clears any holds on a book so it can be borrowed again
+    // throws BookNotFoundException if book is null
     public void clearHold(Book book) {
-        if (book == null) {
-            System.out.println("Error: book not found.");
-            return;
+        try {
+            if (book == null) {
+                throw new BookNotFoundException("Book not found.");
+            }
+            book.clearReservations();
+            System.out.println("Hold cleared for: " + book.getTitle());
+        } catch (BookNotFoundException e) {
+            System.out.println("Clear hold error: " + e.getMessage());
         }
-        book.clearReservations();
-        System.out.println("Hold cleared for: " + book.getTitle());
     }
 
     // updates the staff member's role title
