@@ -53,7 +53,11 @@ Type `X` to exit the program.
 ## Contributions
 | Team Member            | Classes                            | Responsibilities                   |
 |_________________________________________________________________________________________________
+
 | Yanin Arevalos | LibraryStaff, Loan, Authentication interface, InvalidPinException, BookNotFoundException, MemberNotFoundException | Staff menu, loan tracking, fines, authentication, exception handling, unit tests |
+
 | Angelina Ryabechenkova | LibraryUser, Library, Main, Member | Create Library, create member menu, manage members, sorting and book display, login tracking, functionality, system integration |
+
 | Keyi Tan | Book, Catalog, Borrowable interface | Book management, catalog search, borrowable behavior, book checkout and return |
+
 | Cagla Sah | LibraryCard, Reservation | Library card management, study room reservations |
