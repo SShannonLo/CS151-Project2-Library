@@ -43,7 +43,7 @@ public class Library {
     }
 
     // This method deals with the request to add a new user object to the hashMap of users
-    public void addUser(LibraryUser user) throws Library.DuplicateUserException {
+    public void addUser(LibraryUser user) throws DuplicateUserException {
     	
     	// Ensuring no one passes a null user. Shouldn't happen, but we are staying safe.
         if (user == null) {
@@ -189,13 +189,6 @@ public class Library {
     // Helper.
     public HashMap<String, LibraryUser> getUsers() {
         return users;
-    }
-    
-    // Custom exception required per speck.
-    public class DuplicateUserException extends Exception {
-        public DuplicateUserException(String message) {
-            super(message);
-        }
     }
 
     // This is how you print the library info for any particular library.

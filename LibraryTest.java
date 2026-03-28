@@ -46,25 +46,25 @@ public class LibraryTest {
 	
 	// 1. First test is to see if we can add the user successfully.
 	@Test
-    public void testAddUser() throws Library.DuplicateUserException {
+    public void testAddUser() throws DuplicateUserException {
         library.addUser(member1);
         assertEquals(1, library.getUsers().size());
     }
 	
 	// 2. Testing the custom exception that is in the Library class.
 	@Test
-    public void testDuplicateUserException() throws Library.DuplicateUserException {
+    public void testDuplicateUserException() throws DuplicateUserException {
         library.addUser(member1);
 
         assertThrows(
-                Library.DuplicateUserException.class,
+                DuplicateUserException.class,
                 () -> library.addUser(member1)
         );
     }
 	
 	// 3. Testing login
 	@Test
-    public void testLoginSuccess() throws Library.DuplicateUserException {
+    public void testLoginSuccess() throws DuplicateUserException {
         library.addUser(member1);
 
         LibraryUser user = library.login("018134168", "00");
@@ -75,7 +75,7 @@ public class LibraryTest {
 	
 	// 4. Test for failed login.
 	@Test
-    public void testLoginFail() throws Library.DuplicateUserException {
+    public void testLoginFail() throws DuplicateUserException {
         library.addUser(member1);
 
         LibraryUser user = library.login("018134168", "wrong");
@@ -85,7 +85,7 @@ public class LibraryTest {
 	
 	// 5. Remove user.
 	@Test
-    public void testRemoveUser() throws Library.DuplicateUserException {
+    public void testRemoveUser() throws DuplicateUserException {
         library.addUser(member1);
 
         boolean removed = library.removeUser(member1.getId());

@@ -102,7 +102,7 @@ public class Main {
 	            "Staff"
 	        ));
 
-	    } catch (Library.DuplicateUserException e) {
+	    } catch (DuplicateUserException e) {
 	        System.out.println("Error seeding users: " + e.getMessage());
 	    }
 	}
