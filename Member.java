@@ -1,40 +1,49 @@
 import java.util.ArrayList; // Keeping imports to the minimum
 import java.util.Scanner;
+
 public class Member extends LibraryUser implements Authentication{ 
     
     private String role = "library member";
     private double fines;
-    private ArrayList<Book> borrowedBooks; // each member has a list of books under their name
+    private ArrayList<Book> borrowedBooks; // Each member has a list of books under their name.
     private ArrayList<Loan> loans;
     private Library library; // Giving access to library, since I dont inherit from it
     private LibraryCard libraryCard;
-	private ArrayList<Reservation> roomReservations = new ArrayList<>();
+	  private ArrayList<Reservation> roomReservations = new ArrayList<>();
     
+    // Constructor for the Member class
     public Member(String name, String memberId, String email, String phoneNumber, String pin, Library library) {
-        super(memberId, pin, name, phoneNumber, email);
+        
+    	// Pass param-s to the LibraryMember constructor.
+    	super(memberId, pin, name, phoneNumber, email);
 
         this.library = library;
         this.role = "library member";
         this.fines = 0.0;
-        this.borrowedBooks = new ArrayList<>();
-        this.loans = new ArrayList<>();
+        this.borrowedBooks = new ArrayList<>(); // What the user currently has
+        this.loans = new ArrayList<>(); // Records of the past transactions
 
+        // Shows integration with the library card.
         this.libraryCard = new LibraryCard("CARD-" + memberId, this, "2027-12-31");
     }
     
+    // Helper.
     public LibraryCard getLibraryCard() {
         return libraryCard;
     }
     
+    // Helper.
     public String getPin() {
         return pin;
     }
 
+    // Implementation of the abstract method.
 	@Override
 	public String defineRole() {
 		return "Member";
 	}
 
+	// Shows the Member menu.
 	public void addRoomReservation(Reservation reservation) {
 		roomReservations.add(reservation);
 	}
@@ -46,6 +55,8 @@ public class Member extends LibraryUser implements Authentication{
 	public void showMenu() {
 	    Scanner scanner = new Scanner(System.in);
 	    String choice;
+	    
+	    // Spin loop
 	    while (true) {
 	        System.out.println("\nWelcome " + getName());
 	        System.out.println("1. View profile");
@@ -78,6 +89,7 @@ public class Member extends LibraryUser implements Authentication{
 	    }
 	}
 	
+	// Performs checks if the account is eligible for closing.
 	public boolean closeAccount() {
 	    Scanner scanner = new Scanner(System.in);
 
@@ -111,6 +123,7 @@ public class Member extends LibraryUser implements Authentication{
 	    }
 	}
 
+	// Performs checks if the needed book can be checked out.
 	public void checkoutBook() {
 	    Scanner scanner = new Scanner(System.in);
 
@@ -133,6 +146,7 @@ public class Member extends LibraryUser implements Authentication{
 	        return;
 	    }
 
+	    // Records the checkout time.
 	    String loanId = "L" + System.currentTimeMillis();
 	    Loan loan = new Loan(loanId, this, book);
 
@@ -147,6 +161,7 @@ public class Member extends LibraryUser implements Authentication{
 	    }
 	}
 	
+	// Performs checks for book return.
 	public void returnBook() {
 	    Scanner scanner = new Scanner(System.in);
 
@@ -209,7 +224,7 @@ public class Member extends LibraryUser implements Authentication{
 	}
 	
 	// This method is needed to access all books in the library, 
-	//since we can't access them directly, we have to use polymprphism
+	// since we can't access them directly, we have to use polymprphism
 	public void browseBooks() {
 		System.out.println("\n----- Available Books -----");
 	    library.showAllBooks();
@@ -359,27 +374,27 @@ public class Member extends LibraryUser implements Authentication{
 	    sb.append("--------------------------");
 	    return sb.toString();
 	}
+	
 	public double getOutstandingFines() {
-		// TODO Auto-generated method stub
-		return 0;
+		return fines;
 	}
 	public void setOutstandingFines(double d) {
-		// TODO Auto-generated method stub
+		if (d < 0) {
+	        System.out.println("Fines cannot be negative.");
+	        return;
+	    }
+	    fines = d;
 		
 	}
 	
-	
-
 	@Override
 	public boolean authenticate(String inputPin) {
-		// TODO Auto-generated method stub
-		return false;
+		return this.pin.equals(inputPin);
 	}
 
 	@Override
 	public boolean returnIPassOrNoPass() {
-		// TODO Auto-generated method stub
-		return false;
+		return libraryCard != null && libraryCard.checkValidity();
 	}
 }
 
