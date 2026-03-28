@@ -9,7 +9,7 @@ public class Member extends LibraryUser implements Authentication{
     private ArrayList<Loan> loans;
     private Library library; // Giving access to library, since I dont inherit from it
     private LibraryCard libraryCard;
-	  private ArrayList<Reservation> roomReservations = new ArrayList<>();
+	private ArrayList<Reservation> roomReservations = new ArrayList<>();
     
     // Constructor for the Member class
     public Member(String name, String memberId, String email, String phoneNumber, String pin, Library library) {
