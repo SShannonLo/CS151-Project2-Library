@@ -8,6 +8,7 @@ public class Member extends LibraryUser implements Authentication{
     private ArrayList<Loan> loans;
     private Library library; // Giving access to library, since I dont inherit from it
     private LibraryCard libraryCard;
+	private ArrayList<Reservation> roomReservations = new ArrayList<>();
     
     public Member(String name, String memberId, String email, String phoneNumber, String pin, Library library) {
         super(memberId, pin, name, phoneNumber, email);
@@ -34,6 +35,14 @@ public class Member extends LibraryUser implements Authentication{
 		return "Member";
 	}
 
+	public void addRoomReservation(Reservation reservation) {
+		roomReservations.add(reservation);
+	}
+
+	public ArrayList<Reservation> getRoomReservations() {
+		return roomReservations;
+	}
+
 	public void showMenu() {
 	    Scanner scanner = new Scanner(System.in);
 	    String choice;
@@ -45,6 +54,8 @@ public class Member extends LibraryUser implements Authentication{
 	        System.out.println("4. Pay fees");
 	        System.out.println("5. Close account");
 	        System.out.println("6. Return book");
+			System.out.println("7. View room reservations");
+			System.out.println("8. Reserve study room");
 	        System.out.println("X. Exit");
 	        choice = scanner.nextLine();
 	        if (choice.equalsIgnoreCase("X")) {
@@ -60,6 +71,8 @@ public class Member extends LibraryUser implements Authentication{
 	            			}
 	           			  break;
 	            case "6": returnBook(); break;
+				case "7": viewRoomReservations(); break;
+				case "8": reserveRoom(); break;
 	            default: System.out.println("Invalid input");
 	        }
 	    }
@@ -202,6 +215,69 @@ public class Member extends LibraryUser implements Authentication{
 	    library.showAllBooks();
 	    System.out.println("---------------------------");
 	}
+
+	public void viewRoomReservations() {
+    	System.out.println("\n----- Room Reservations -----");
+
+    	if (roomReservations.isEmpty()) {
+       		System.out.println("No reservations found.");
+   	 	} else {
+      		for (Reservation r : roomReservations) {
+            	System.out.println(r);
+            	System.out.println("---------------------");
+        	}
+    	}
+	}
+
+	public void reserveRoom() {
+    	Scanner scanner = new Scanner(System.in);
+
+    	System.out.println("Available Rooms:");
+    	System.out.println("1. Room A");
+    	System.out.println("2. Room B");
+    	System.out.println("3. Room C");
+    	System.out.println("4. Room D");
+    	System.out.println("5. Room E");
+
+    	System.out.print("Choose a room (1-5): ");
+    	String choice = scanner.nextLine();
+
+    	String room;
+
+    	switch (choice) {
+    	    case "1":
+    	        room = "Room A";
+    	        break;
+    	    case "2":
+    	        room = "Room B";
+    	        break;
+    	    case "3":
+    	        room = "Room C";
+    	        break;
+    	    case "4":
+    	        room = "Room D";
+    	        break;
+    	    case "5":
+    	        room = "Room E";
+    	        break;
+    	    default:
+    	        System.out.println("Invalid choice.");
+    	        return;
+    	}
+
+    	System.out.print("Enter date (YYYY-MM-DD): ");
+    	String date = scanner.nextLine();
+
+    	System.out.print("Enter time (HH:MM): ");
+    	String time = scanner.nextLine();
+
+    	String reservationId = "R" + System.currentTimeMillis();
+
+    	Reservation reservation = new Reservation(reservationId, this, room, date, time);
+    	addRoomReservation(reservation);
+
+    	System.out.println("Room " + room + " reserved successfully!");
+	}
 	
 	public void payFees() {
 	    Scanner scanner = new Scanner(System.in);
@@ -265,6 +341,17 @@ public class Member extends LibraryUser implements Authentication{
 	    } else {
 	        for (Book book : borrowedBooks) {
 	            sb.append("  - ").append(book.getTitle()).append("\n");
+	        }
+	    }
+	    sb.append("Room Reservations:\n");
+	    if (roomReservations.isEmpty()) {
+	        sb.append("  None\n");
+	    } else {
+	        for (Reservation r : roomReservations) {
+	            sb.append("  - ").append(r.getRoomName())
+				  .append(" on ").append(r.getReservationDate())
+				  .append(" at ").append(r.getTimeSlot())
+				  .append("\n");
 	        }
 	    }
 	    sb.append("Library Card ID: ").append(libraryCard.getCardId()).append("\n");
