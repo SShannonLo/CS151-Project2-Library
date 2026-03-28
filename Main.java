@@ -60,6 +60,7 @@ public class Main {
 					return user;
  				}
 				
+				// If the user you searched for was nether Member nor Staff, nor null.
 				System.out.println("Invalid. Please try again. \n");
 			} catch (NumberFormatException e) {
 				
@@ -82,7 +83,7 @@ public class Main {
         libraryCityLibrary.addUser(new LibraryStaff("Librarian Bob","110110110", "22", "bob.bookson@sjsu.edu", "4254292222", "Staff"));
     }
 	
-	// Adding some books to our library. Note that Book id = to isbn
+	// Adding some books to our library.
 	public static void seedBooks(Library libraryCityLibrary) {
 	    libraryCityLibrary.addBook(new Book("B1", "The Great Gatsby", "F. Scott Fitzgerald", "978"));
 	    libraryCityLibrary.addBook(new Book("B2", "To Kill a Mockingbird", "Harper Lee", "979"));
