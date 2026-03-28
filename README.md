@@ -1,13 +1,13 @@
 # CS151-Project2-Library
 
 ## Overview
-This is a Java-based Library Management System developed for CS151 Spring 2026.
-The system simulates a real-world library where members can borrow books, staff
+This is a Java Library Management System developed for CS151.
+The system simulates a library where members can borrow books, staff
 can manage the collection, and the system tracks loans and fines automatically.
 Users log in with an ID and PIN, and are shown a menu based on their role.
 
 ## Design
-The system is built around the following classes:
+The system consists the following classes:
 
 - **Book** - represents a book in the library. Supports checkout, return, and reservations.
 - **Catalog** - manages the collection of books. Supports searching by title, author, and ID.
