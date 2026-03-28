@@ -44,14 +44,14 @@ public class LibraryTest {
         book2 = new Book("B2", "Pride and Prejudice", "Jane Austen", "9780141439518");
     }
 	
-	// First test is to see if we can add the user successfully.
+	// 1. First test is to see if we can add the user successfully.
 	@Test
     public void testAddUser() throws Library.DuplicateUserException {
         library.addUser(member1);
         assertEquals(1, library.getUsers().size());
     }
 	
-	// Testing the custom exception that is in the Library class.
+	// 2. Testing the custom exception that is in the Library class.
 	@Test
     public void testDuplicateUserException() throws Library.DuplicateUserException {
         library.addUser(member1);
@@ -62,7 +62,7 @@ public class LibraryTest {
         );
     }
 	
-	// Testing login
+	// 3. Testing login
 	@Test
     public void testLoginSuccess() throws Library.DuplicateUserException {
         library.addUser(member1);
@@ -71,6 +71,36 @@ public class LibraryTest {
 
         assertNotNull(user);
         assertEquals("Angelina", user.getName());
+    }
+	
+	// 4. Test for failed login.
+	@Test
+    public void testLoginFail() throws Library.DuplicateUserException {
+        library.addUser(member1);
+
+        LibraryUser user = library.login("018134168", "wrong");
+
+        assertNull(user);
+    }
+	
+	// 5. Remove user.
+	@Test
+    public void testRemoveUser() throws Library.DuplicateUserException {
+        library.addUser(member1);
+
+        boolean removed = library.removeUser(member1.getId());
+
+        assertTrue(removed);
+        assertFalse(library.getUsers().containsKey(member1.getId()));
+    }
+	
+    // 6. Add book
+    @Test
+    public void testAddBook() {
+        boolean added = library.addBook(book1);
+
+        assertTrue(added);
+        assertEquals(book1, library.getBook("B1"));
     }
 
 }
