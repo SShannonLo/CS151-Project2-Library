@@ -78,10 +78,34 @@ public class Main {
 	}
 	// Adding some seed users and one librarian
 	public static void seedUsers(Library libraryCityLibrary) {
-        libraryCityLibrary.addUser(new Member( "Angelina", "018134168", "angelina.ryabechenkova@sjsu.edu", "4254290000", "00", libraryCityLibrary));
-        libraryCityLibrary.addUser(new Member("David", "018134169", "david.doe@sjsu.edu", "4254291111", "11", libraryCityLibrary));
-        libraryCityLibrary.addUser(new LibraryStaff("Librarian Bob","110110110", "22", "bob.bookson@sjsu.edu", "4254292222", "Staff"));
-    }
+	    try {
+	        libraryCityLibrary.addUser(new Member(
+	            "Angelina", "018134168",
+	            "angelina.ryabechenkova@sjsu.edu",
+	            "4254290000", "00",
+	            libraryCityLibrary
+	        ));
+
+	        libraryCityLibrary.addUser(new Member(
+	            "David", "018134169",
+	            "david.doe@sjsu.edu",
+	            "4254291111", "11",
+	            libraryCityLibrary
+	        ));
+
+	        libraryCityLibrary.addUser(new LibraryStaff(
+	            "Librarian Bob",
+	            "110110110",
+	            "22",
+	            "bob.bookson@sjsu.edu",
+	            "4254292222",
+	            "Staff"
+	        ));
+
+	    } catch (Library.DuplicateUserException e) {
+	        System.out.println("Error seeding users: " + e.getMessage());
+	    }
+	}
 	
 	// Adding some books to our library.
 	public static void seedBooks(Library libraryCityLibrary) {
