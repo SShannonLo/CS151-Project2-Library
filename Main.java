@@ -53,7 +53,7 @@ public class Main {
 				    member.showMenu();
 				} else if (user instanceof LibraryStaff) {
 				    LibraryStaff staff = (LibraryStaff) user;
-				    staff.showMenu(staff);
+					staff.showMenu(staff, libraryCityLibrary);
 				}
 				
 				if(user != null) {
