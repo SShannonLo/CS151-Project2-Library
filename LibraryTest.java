@@ -50,5 +50,27 @@ public class LibraryTest {
         library.addUser(member1);
         assertEquals(1, library.getUsers().size());
     }
+	
+	// Testing the custom exception that is in the Library class.
+	@Test
+    public void testDuplicateUserException() throws Library.DuplicateUserException {
+        library.addUser(member1);
+
+        assertThrows(
+                Library.DuplicateUserException.class,
+                () -> library.addUser(member1)
+        );
+    }
+	
+	// Testing login
+	@Test
+    public void testLoginSuccess() throws Library.DuplicateUserException {
+        library.addUser(member1);
+
+        LibraryUser user = library.login("018134168", "00");
+
+        assertNotNull(user);
+        assertEquals("Angelina", user.getName());
+    }
 
 }
