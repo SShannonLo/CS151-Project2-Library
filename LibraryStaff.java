@@ -48,19 +48,18 @@ public class LibraryStaff extends LibraryUser implements Authentication {
     }
 
     // shows the menu for staff members after they log in
-    public void showMenu(LibraryStaff staff) {
+    public void showMenu(LibraryStaff staff, Library library) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("\nHello " + staff.getName() + "! What would you like to do?");
 
         boolean running = true;
         while (running) {
-            // print out all the options
             System.out.println("\n====== Staff Menu ======");
             System.out.println("1 - Add a book to the library");
             System.out.println("2 - Remove a book from the library");
-            System.out.println("3 - Register a new member");
+            System.out.println("3 - View all books");
             System.out.println("4 - Waive a member's fine");
-            System.out.println("5 - Clear a hold on a book");
+            System.out.println("5 - Search books by title");
             System.out.println("6 - Update my role");
             System.out.println("7 - Logout");
             System.out.println("========================");
@@ -68,26 +67,61 @@ public class LibraryStaff extends LibraryUser implements Authentication {
 
             String choice = scanner.nextLine();
 
-            // check what the user picked and do that thing
             if (choice.equals("1")) {
-                System.out.println("Add book - coming soon!");
+                // ask for book details and add it
+                System.out.print("Enter book ID: ");
+                String bookId = scanner.nextLine();
+                System.out.print("Enter title: ");
+                String title = scanner.nextLine();
+                System.out.print("Enter author: ");
+                String author = scanner.nextLine();
+                System.out.print("Enter ISBN: ");
+                String isbn = scanner.nextLine();
+                Book newBook = new Book(bookId, title, author, isbn);
+                addBook(newBook, library);
+
             } else if (choice.equals("2")) {
-                System.out.println("Remove book - coming soon!");
+                // ask for book ID and remove it
+                System.out.print("Enter book ID to remove: ");
+                String bookId = scanner.nextLine();
+                Book bookToRemove = library.getBook(bookId);
+                if (bookToRemove == null) {
+                    System.out.println("Book not found.");
+                } else {
+                    removeBook(bookToRemove, library);
+                }
+
             } else if (choice.equals("3")) {
-                System.out.println("Register member - coming soon!");
+                // show all books in the library
+                library.showAllBooks();
+
             } else if (choice.equals("4")) {
-                System.out.println("Waive fine - coming soon!");
+                // waive a fine - ask for member ID
+                System.out.print("Enter member ID to waive fine for: ");
+                String memberId = scanner.nextLine();
+                LibraryUser user = library.getUsers().get(memberId);
+                if (user instanceof Member) {
+                    waiveFine((Member) user);
+                } else {
+                    System.out.println("Member not found.");
+                }
+
             } else if (choice.equals("5")) {
-                System.out.println("Clear hold - coming soon!");
+                // search books by title
+                System.out.print("Enter title to search: ");
+                String title = scanner.nextLine();
+                library.searchBooksByTitle(title);
+
             } else if (choice.equals("6")) {
                 System.out.print("Enter your new role title: ");
                 String newRole = scanner.nextLine();
                 staff.updateRole(newRole);
+
             } else if (choice.equals("7")) {
                 System.out.println("Logging out. Goodbye " + staff.getName() + "!");
                 running = false;
+
             } else {
-                // if they typed something wrong
                 System.out.println("Hmm, that's not a valid option. Try again!");
             }
         }
