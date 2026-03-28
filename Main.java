@@ -35,11 +35,11 @@ public class Main {
 		
 		// Keep waiting for the user to give correct input.
 		while(true) {
-			System.out.println("Enter your numeric ID, or X to exit, please: ");
+			System.out.println("Enter your numeric ID, or EXIT to exit, please: ");
 			String idInput = scanner.nextLine();
 			checkExit(idInput);
 		
-			System.out.println("Enter your numeric PIN, or X to exit, please: ");
+			System.out.println("Enter your numeric PIN, or EXIT to exit, please: ");
 			String pinInput = scanner.nextLine();
 			checkExit(pinInput);
 			
@@ -70,12 +70,15 @@ public class Main {
 		}
 		
 	}
+	// Checks if the user wants to exit the program at any point
+	// Supports both "X" and "EXIT" for graceful shutdown (extra credit)
 	public static void checkExit(String input) {
-		if(input.equalsIgnoreCase("X")) {
-			System.out.println("\nGoodbye! Come again to the City Library. ");
-			System.exit(0); // We completely exit out of the program here.
-		}
+	    if(input.equalsIgnoreCase("X") || input.equalsIgnoreCase("EXIT")) {
+	        System.out.println("\nGoodbye! Come again to the City Library. ");
+	        System.exit(0); // We completely exit out of the program here.
+	    }
 	}
+	
 	// Adding some seed users and one librarian
 	public static void seedUsers(Library libraryCityLibrary) {
 	    try {

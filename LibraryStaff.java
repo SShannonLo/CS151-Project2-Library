@@ -138,6 +138,8 @@ public class LibraryStaff extends LibraryUser implements Authentication {
             System.out.println(member.getName() + " has been registered.");
         } catch (MemberNotFoundException e) {
             System.out.println("Registration error: " + e.getMessage());
+        } catch (DuplicateUserException e) {
+            System.out.println("Registration error: " + e.getMessage());
         }
     }
 

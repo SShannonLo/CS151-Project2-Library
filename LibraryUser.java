@@ -16,8 +16,8 @@ public abstract class LibraryUser {
 		
 	}
 	
-	public boolean authenticate(int inputPin) {
-		return (this.pin).equals(inputPin); // We are comparing primitives
+	public boolean authenticate(String inputPin) {
+		return this.pin.equals(inputPin);
 	}
 	
 	public String getName() {
