@@ -25,16 +25,23 @@ Custom exceptions for error handling:
 - **InvalidPinException** - thrown when a PIN is null or empty.
 - **BookNotFoundException** - thrown when a book cannot be found.
 - **MemberNotFoundException** - thrown when a member cannot be found.
+- **DuplicateUserException** - thrown when a user with the same ID already exists.
 
 ## Installation Instructions
-On your machine in the terminal window do the following (we assume you installed git):
 
-1. mkdir NewDirForProjectGrading
-2. cd NewDirForProjectGrading
-3. Clone the repository: `git clone https://github.com/angelinary/CS151-Project2-Library`
-4. Open the project in IntelliJ IDEA
-5. Make sure JDK 23 is configured
-6. Run `Main.java` to start the program. Use 018134168 for user ID, and 00 for PIN. 
+### Option 1: Eclipse (Recommended)
+1. Clone the repository: `git clone https://github.com/angelinary/CS151-Project2-Library`
+2. Open Eclipse IDE → File → Open Projects from File System → select the cloned folder
+3. Right-click the project → Build Path → Add Libraries → JUnit 5
+4. Right-click `Main.java` → Run As → Java Application
+
+### Option 2: Command Line
+1. Clone the repository: `git clone https://github.com/angelinary/CS151-Project2-Library`
+2. `cd CS151-Project2-Library`
+3. `javac *.java` (ignore JUnit test errors — the main program compiles fine)
+4. `java Main`
+
+Make sure JDK 23 is configured.
 
 ## Usage
 When the program starts it will display library hours and prompt you to log in.
@@ -48,16 +55,13 @@ When the program starts it will display library hours and prompt you to log in.
 
 **Staff menu options:** Add a book, remove a book, view all books, waive a member's fine, search books by title, update role, logout.
 
-Type `X` to exit the program.
+Type `X` or `EXIT` at any prompt to exit the program.
 
 ## Contributions
-| Team Member            | Classes                            | Responsibilities                   |
-|_________________________________________________________________________________________________
 
-| Yanin Arevalos | LibraryStaff, Loan, Authentication interface, InvalidPinException, BookNotFoundException, MemberNotFoundException | Staff menu, loan tracking, fines, authentication, exception handling, unit tests |
-
+| Team Member | Classes | Responsibilities |
+|---|---|---|
+| Yanin Arevalos | LibraryStaff, Loan, Authentication interface, InvalidPinException, BookNotFoundException, MemberNotFoundException | Staff menu, loan tracking, fines, authentication, exception handling, unit tests, .gitignore setup, README contributions |
 | Angelina Ryabechenkova | LibraryUser, Library, Main, Member | Create Library, create member menu, manage members, sorting and book display, login tracking, functionality, system integration |
-
 | Keyi Tan | Book, Catalog, Borrowable interface | Book management, catalog search, borrowable behavior, book checkout and return |
-
 | Cagla Sah | LibraryCard, Reservation | Library card management, study room reservations |
