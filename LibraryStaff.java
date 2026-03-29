@@ -66,6 +66,7 @@ public class LibraryStaff extends LibraryUser implements Authentication {
             System.out.print("Enter a number: ");
 
             String choice = scanner.nextLine();
+            Main.checkExit(choice);
 
             if (choice.equals("1")) {
                 // ask for book details and add it
