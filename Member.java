@@ -69,6 +69,7 @@ public class Member extends LibraryUser implements Authentication{
 			System.out.println("8. Reserve study room");
 	        System.out.println("X. Exit");
 	        choice = scanner.nextLine();
+	        Main.checkExit(choice);
 	        if (choice.equalsIgnoreCase("X")) {
 	            break;
 	        }
