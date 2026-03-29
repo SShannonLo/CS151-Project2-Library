@@ -61,7 +61,8 @@ public class LibraryStaff extends LibraryUser implements Authentication {
             System.out.println("4 - Waive a member's fine");
             System.out.println("5 - Search books by title");
             System.out.println("6 - Update my role");
-            System.out.println("7 - Logout");
+            System.out.println("7 - Register a new member");
+            System.out.println("8 - Logout");
             System.out.println("========================");
             System.out.print("Enter a number: ");
 
@@ -119,6 +120,21 @@ public class LibraryStaff extends LibraryUser implements Authentication {
                 staff.updateRole(newRole);
 
             } else if (choice.equals("7")) {
+                // register a new member
+                System.out.print("Enter member name: ");
+                String mName = scanner.nextLine();
+                System.out.print("Enter member ID: ");
+                String mId = scanner.nextLine();
+                System.out.print("Enter member email: ");
+                String mEmail = scanner.nextLine();
+                System.out.print("Enter member phone: ");
+                String mPhone = scanner.nextLine();
+                System.out.print("Enter member PIN: ");
+                String mPin = scanner.nextLine();
+                Member newMember = new Member(mName, mId, mEmail, mPhone, mPin, library);
+                registerMember(newMember, library);
+
+            } else if (choice.equals("8")) {
                 System.out.println("Logging out. Goodbye " + staff.getName() + "!");
                 running = false;
 
